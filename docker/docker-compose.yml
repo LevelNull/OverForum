@@ -1,0 +1,27 @@
+version: '3'
+services:
+    overforum_node:
+        container_name: overforum_node
+        build: 
+            context: ./node/
+            dockerfile: ./Dockerfile
+        volumes: 
+            - ./cert:/var/overforum/cert
+        ports: 
+            - "80:80"
+            - "443:443"
+        environment: 
+            MYSQL_USER: overforum
+            MYSQL_PASSWORD: travisci
+
+    overforum_mysql:
+        container_name: overforum_mysql
+        build: 
+            context: ./mysql/
+            dockerfile: ./Dockerfile
+        environment: 
+            MYSQL_RANDOM_ROOT_PASSWORD: 1
+            MYSQL_USER: overforum
+            MYSQL_PASSWORD: travisci
+        ports: 
+            - "33060:3306"
