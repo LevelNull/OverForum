@@ -37,4 +37,5 @@ else
 fi
 
 cd /var/overforum
+npm i
 node overforum.js

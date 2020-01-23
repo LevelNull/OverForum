@@ -1,0 +1,30 @@
+<link rel="stylesheet" href="header.css" >
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
+<div id=header>
+    <div id=nameplate >
+        <a href="/">OverForum</a>
+    </div>
+    <div class=right-nav>
+        
+        <div class="nav nav-narrow" >
+            <img class=opener src="opener_down.png">
+            <div class=nav-list>
+                <a href="/">Home</a>
+                <% if(locals.user) { %>
+                    <a href="/myaccount">Profile</a>
+                    <a href="/logout">Log out</a>
+                <% } %>
+            </div>
+        </div>
+        <div class=userinfo>
+                <% if(locals.user) { %>
+                    <a href="/myaccount" class="user-nameplate login-button" >
+                <%- user.fullname %>
+                    </a>
+                <% }else{ %>
+                    <a href="/login" class=login-button >Login</a>
+                <% } %>
+            </a>
+        </div>
+    </div>
+</div>

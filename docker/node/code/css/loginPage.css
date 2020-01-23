@@ -1,0 +1,42 @@
+.inputArea input{
+    padding: 5px;
+    font-size: 14px;
+    display: block;
+    background-color: rgb(80,80,80);
+    color: rgb(200,200,200);
+    border: none;
+    margin:10px;
+    border-radius: 2px;
+}
+#doneButton{
+    padding: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: 14px;
+    display: inline-block;
+    background-color: rgb(80,80,80);
+    color: rgb(200,200,200);
+    border: none;
+    margin:10px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+#doneButton:hover{
+    background-color: #006F7C;
+}
+#loginForm{
+    margin-top: calc(50vh - 200px);
+}
+.inputArea{
+    display: inline-block;
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+#central{
+    vertical-align: middle;
+}
+#content{
+    vertical-align: middle;
+}

@@ -6,6 +6,7 @@ services:
             context: ./node/
             dockerfile: ./Dockerfile
         volumes: 
+            - ./node/code:/var/overforum
             - ./cert:/var/overforum/cert
         ports: 
             - "80:80"

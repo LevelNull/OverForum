@@ -12,4 +12,5 @@ def test_Header():
     assert 'text/html' in page.headers['content-type']
 
 def test_Content():
-    assert 'Test index page' in page.text
+    assert 'Recent Threads' in page.text
+    assert 'Site News' in page.text
