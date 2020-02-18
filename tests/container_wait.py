@@ -2,7 +2,7 @@ import requests
 import json
 import time
 ADDRESS = "https://localhost"
-MAX_RETRIES = 10
+MAX_RETRIES = 12
 
 def checkfor_web(count):
     if count > MAX_RETRIES:
@@ -13,7 +13,8 @@ def checkfor_web(count):
     except:
         page = None
     if page != None:
-        return True
+        print("Server online, beginning tests...")
+        exit(0)
     else:
         print("("+str(count)+") Waiting for Node Web Server...")
         time.sleep(4)
@@ -21,11 +22,7 @@ def checkfor_web(count):
 
 def main():
     isUp = checkfor_web(0)
-    if isUp:
-        print("Server online, beginning tests...")
-        exit(0)
-    else:
-        print("Server didn't resond after "+str(MAX_RETRIES)+" retries!")
-        exit(1)
+    print("Server didn't respond after "+str(MAX_RETRIES)+" retries!")
+    exit(1)
 
 main()

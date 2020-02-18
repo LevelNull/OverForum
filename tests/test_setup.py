@@ -29,6 +29,7 @@ def test_1setup_page():
     global COOKIES
     global SETUPLOC
     try:
+        requests.packages.urllib3.disable_warnings() 
         page = requests.get(ADDRESS+SETUPLOC+"/",cookies=COOKIES ,verify=False)
     except:
         page = None
@@ -50,6 +51,7 @@ def test_2mysql_Test():
         }
     }
     try:
+        requests.packages.urllib3.disable_warnings() 
         page = requests.post(ADDRESS+SETUPLOC+"/mysqlTest",cookies=COOKIES,json=mysqlOpts,verify=False)
     except:
         page = None
@@ -78,6 +80,7 @@ def test_3preSetup():
         "options":mysqlOpts
         }
     try:
+        requests.packages.urllib3.disable_warnings() 
         page = requests.post(ADDRESS+SETUPLOC+"/preSetup",cookies=COOKIES,json=credential,verify=False)
     except:
         page = None
@@ -90,6 +93,7 @@ def test_4set_mysql():
     global SETUPLOC
     global COOKIES
     try:
+        requests.packages.urllib3.disable_warnings() 
         page = requests.post(ADDRESS+SETUPLOC+"/setMysql",cookies=COOKIES,verify=False)
     except:
         page = None
@@ -102,6 +106,7 @@ def test_5create_tables():
     global SETUPLOC
     global COOKIES
     try:
+        requests.packages.urllib3.disable_warnings() 
         page = requests.post(ADDRESS+SETUPLOC+"/createTables",cookies=COOKIES,verify=False)
     except:
         page = None
@@ -114,6 +119,7 @@ def test_6admin_password():
     global SETUPLOC
     global COOKIES
     try:
+        requests.packages.urllib3.disable_warnings() 
         page = requests.post(ADDRESS+SETUPLOC+"/acs",cookies=COOKIES,verify=False)
     except:
         page = None
@@ -126,6 +132,7 @@ def test_7finish():
     global SETUPLOC
     global COOKIES
     try:
+        requests.packages.urllib3.disable_warnings() 
         page = requests.post(ADDRESS+SETUPLOC+"/finish",cookies=COOKIES,verify=False)
     except:
         page = None
