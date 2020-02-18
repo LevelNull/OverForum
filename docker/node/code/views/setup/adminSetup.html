@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/main.css" >
+        <link rel="stylesheet" href="/infopane.css" >
+        <link rel="stylesheet" href="/loginPage.css" >
+        <link rel="stylesheet" href="/objects/switch.css" >
+        <script src="/jquery.js"></script>
+    </head>
+    <body>
+        <%- include ('../header.html') %>
+        <div id=content>
+            <div id=central>
+                <div id=setupForm class="center short-section section header-gray" >
+                    <h2 id=setupHeader >Administrative Setup</h2>
+                    <div id=adminSetup class=section-content>
+                        <div class=inputArea>
+                            <h4 class="h4Close">Admin Credentials</h4>
+                            <input id=password type="password" placeholder="Create Password">
+                            <input id=passwordconfirm type="password" placeholder="Confirm Password">
+                            <a id=credentialError class=errorText></a>
+                            <a id=credentialWarn class=warnText></a>
+                        </div>
+                        <hr>
+                        <div class="inputArea">
+                            <h4 class=h4Close>MySql Configuration</h4>
+                            <input id=mysqlHost placeholder="Host: Blank for Built-In">
+                            <input id=mysqlUser placeholder="User: Blank for Built-In">
+                            <input id=mysqlPassword placeholder="Password: Blank for Built-In">
+                            <input id=mysqlDatabase placeholder="Database: Blank for Built-In">
+                            <input id=tablePrefix placeholder="Table Prefixes: overforum_">
+                            <a id=mysqlError class=errorText></a>
+                            <a id=mysqlWarn class=warnText></a>
+                            <a id=mysqlGood class=goodText ></a>
+                            <button class="button" id=testMysql>
+                                <a>Test Connection</a>
+                            </button>
+                        </div>
+                        <hr>
+                        <a id=errorText></a>
+                        <button class="button" id=doneButton>
+                            <a>Done</a>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script type="text/javascript" src="/setup/setup.js"></script>
+</html>

@@ -14,6 +14,8 @@ services:
         environment: 
             MYSQL_USER: overforum
             MYSQL_PASSWORD: travisci
+        depends_on: 
+            - overforum_mysql
 
     overforum_mysql:
         container_name: overforum_mysql

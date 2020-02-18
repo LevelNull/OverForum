@@ -1,5 +1,6 @@
 FROM node:10
 RUN apt-get update && apt-get -y upgrade
+RUN apt-get install -y netcat
 RUN mkdir /var/overforum
 ADD ./config/init.sh /init.sh
 ADD ./config/wait.sh /wait.sh

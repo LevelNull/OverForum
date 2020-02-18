@@ -1,8 +1,24 @@
-var mysql = require("mysql");
-var loginMan = require("./auth/loginManager");
 var express = require("express");
+var _mysql = require("mysql");
+var renderer = require("./tools/renderer");
+
+
+async function setupApi(app,mysqlopts){
+    return new Promise((resolve,reject)=>{
+        require("../server_js/setup/firsttime").setupListener(
+            app,
+            mysqlopts,
+            (goodResponse) => {
+                resolve(goodResponse);
+            },
+            (badResponse) => {
+                reject(badResponse);
+            });
+    });
+}
 
 function locations(app){
+    
     app.get("/favicon.ico",function(req,res){
         res.status(400);
     });
@@ -16,22 +32,36 @@ function locations(app){
         res.sendFile("/var/overforum/image/"+req.path);
     });
     app.get("/",function(req,res){
-        renderFile("index.html",req,res);
+        renderer.renderFile("index.html",req,res);
     });
     app.get("/login",function(req,res){
-        renderFile("auth/loginPage.html",req,res);
+        renderer.renderFile("auth/loginPage.html",req,res);
     });
-    app.post("/submitlogin",function(req,res){
-        app.use(express.json());
-        if(loginMan.login(req.body)){
-            
-        }
-    });
+    
+    
+}
+
+
+function addFourOhFour(app){
     app.get("*",function(req,res){
-        renderFile("status/none.html",req,res);
+        //console.log("serve 404");
+        renderer.renderFile("status/none.html",req,res);
     });
 }
-function renderFile(file,req,res){
-    res.render(file);
+
+function loadAll(app){
+    var mysql = require("./../config/settings").mysqlOptions;
+    var setupListen = setupApi(app,mysql)
+        .then(result => {
+            if(result != false){
+                console.log("Admin setup located at /setup/"+result);
+                require("../server_js/setup/firsttime").startSetupListeners(app,mysql,result);
+            }
+            locations(app,mysql);
+            addFourOhFour(app);
+      }).catch(error =>{
+        console.log(error);
+      });
 }
+module.exports.loadAll = loadAll;
 module.exports.locations = locations;

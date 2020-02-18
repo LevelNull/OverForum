@@ -1,46 +1,48 @@
 var express = require("express");
 const http = require('http');
-const fs = require('fs');
 const spdy = require('spdy')
 var app = express();
 var helmet = require('helmet');
 const cookieParser = require("cookie-parser");
 const csp = require('express-csp-header');
 var path = require("path");
-var session = require("express-session")
+var session = require("express-session");
 var bodyParser = require('body-parser');
+var mainConfig = require("./config/settings");
 
-const privateKey = fs.readFileSync('/var/overforum/cert/privkey.pem', 'utf8');
-const certificate = fs.readFileSync('/var/overforum/cert/cert.pem', 'utf8');
-const ca = fs.readFileSync('/var/overforum/cert/chain.pem', 'utf8');
-const credentials = {
-	key: privateKey,
-	cert: certificate,
-	ca: ca
-};
-app.use(helmet());
-app.disable('x-powered-by');
-app.use(session({ resave: true ,secret: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) , saveUninitialized: true}));
-app.use(cookieParser());
-app.use(csp({
-    policies: {
-        'default-src': [csp.SELF],
-        'font-src': ['*'],
-        'script-src': [csp.SELF],
-        'style-src': [csp.SELF, 'http://fonts.googleapis.com/'],
-        'img-src': ["*"],
-        'worker-src': [csp.NONE],
-        'block-all-mixed-content': true
+var logger = function(req,res,next){
+    console.log(req.method+"\t"+req.ip+"\t"+new Date().getTime()+"\t"+req.url);
+    next();
+}
+
+app.use('*', function(req, res, next) {
+    if(!req.secure) {
+      var secureUrl = "https://" + req.headers['host'] + req.url; 
+      res.writeHead(301, { "Location":  secureUrl });
+      res.end();
     }
-  }));
+    next();
+});
+//app.use(helmet());
+app.disable('x-powered-by');
+app.use(session({ resave: true ,secret: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) , saveUninitialized: true,cookie:{httpOnly:true,secure:true,sameSite:true}}));
+app.use(cookieParser());
+app.use(csp({policies: mainConfig.cspPolicies }));
+app.use(bodyParser.json({strict:false}));
 app.engine('.html', require('ejs').__express);
 const httpServer = http.createServer(app);
-const httpsServer = spdy.createServer(credentials, app);
+const httpsServer = spdy.createServer(mainConfig.serverKeys, app);
 httpServer.listen(80, () => {
-    console.log("HTTP Listening on 80");
+    console.log("HTTP Redirector Listening on 80");
 });
 
 httpsServer.listen(443, () => {
     console.log("HTTPS/SPDY Listening on 443");
 });
-var locations = require("./server_js/locations").locations(app);
+
+
+app.use(logger);
+var permissions = require(".//server_js/auth/permissionManager");
+var authmanager = require("./server_js/auth/authManager").startloginListener(app,permissions);
+var adminfunctions = require("./server_js/admin/functions").loadListeners(app,permissions);
+var locations = require("./server_js/locations").loadAll(app);

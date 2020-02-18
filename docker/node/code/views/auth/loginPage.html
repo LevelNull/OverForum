@@ -6,18 +6,22 @@
         <link rel="stylesheet" href="main.css" >
         <link rel="stylesheet" href="infopane.css" >
         <link rel="stylesheet" href="loginPage.css" >
+        <script src="jquery.js"></script>
         
     </head>
     <body>
         <div id=content>
             <div id=central>
-                <div id=loginForm class="short-section section header-gray" >
+                <div id=loginForm class="center short-section section header-gray" >
                     <h2>Login</h2>
                     <div class=section-content>
                         <div class=inputArea>
+                            <div>
                             <input id=username placeholder="Email">
                             <input id=password type="password" placeholder="Password">
-                            <button id=doneButton>
+                            <a id=errorText></a>
+                        </div>
+                            <button class="button" id=doneButton>
                                 <a>Done</a>
                             </button>
                         </div>
@@ -26,4 +30,5 @@
             </div>
         </div>
     </body>
+    <script src="auth/loginPage.js"></script>
 </html>

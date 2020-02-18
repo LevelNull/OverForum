@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="header.css" >
+<link rel="stylesheet" href="/header.css" >
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
 <div id=header>
     <div id=nameplate >
@@ -7,11 +7,14 @@
     <div class=right-nav>
         
         <div class="nav nav-narrow" >
-            <img class=opener src="opener_down.png">
+            <img class=opener src="/opener_down.png">
             <div class=nav-list>
                 <a href="/">Home</a>
                 <% if(locals.user) { %>
                     <a href="/myaccount">Profile</a>
+                    <% if(locals.user.adminpanel){ %>
+                    <a href="admin/panel" >Admin Panel</a>
+                    <% } %>
                     <a href="/logout">Log out</a>
                 <% } %>
             </div>
@@ -19,12 +22,11 @@
         <div class=userinfo>
                 <% if(locals.user) { %>
                     <a href="/myaccount" class="user-nameplate login-button" >
-                <%- user.fullname %>
+                <%- user.firstname %>
                     </a>
                 <% }else{ %>
                     <a href="/login" class=login-button >Login</a>
                 <% } %>
-            </a>
         </div>
     </div>
 </div>

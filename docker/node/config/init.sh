@@ -35,7 +35,15 @@ else
     -keyout $KEY  -out $CERT
     cp $CERT $CA
 fi
-
 cd /var/overforum
+if test -f "jquery*" ; then
+    echo "Using provided JQuery file..."
+else
+    cd web_js
+    wget https://code.jquery.com/jquery-3.4.1.min.js -O jquery.js
+    cd ..
+fi
 npm i
+while ! nc -z overforum_mysql 3306; do sleep 3; echo "Waiting for MySql Container..."; done
+echo "MySql container online, starting up..."
 node overforum.js

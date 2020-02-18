@@ -1,9 +1,56 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>OverForum</title>
+        <%- include ('header.html') %>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="/main.css" >
+        <link rel="stylesheet" href="/infopane.css" >
+        <link rel="stylesheet" href="/topiclist.css" >
     </head>
     <body>
-        <h1>Test index page</h1>
+        <div id=content>
+            <div id=central>
+                <div class="long-section section header-blue" >
+                    <h2>Recent Threads</h2>
+                    <div class="section-content">
+                        <div class=list >
+                            <div class="topicListItem" >
+                                <div class=listThreadHeader >
+                                    <h2>Thread Title</h2>
+                                    <sub>posted {time}</sub>
+                                    <a class=listThreadUser >{username}</a>
+                                </div>
+                                <div class=listThreadContent>
+                                    <a>Test TestTestTest Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test TestTestTestTestTestTestTestTestTestTestTestTestTest</a>
+                                </div>
+                            </div>
+                            <div class=endListItem >
+                                <a>End of list</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="long-section section header-red" >
+                    <h2>Site News</h2>
+                    <div class="section-content">
+                        <div class=list >
+                            <div class="topicListItem" >
+                                <div class=listThreadHeader >
+                                    <h2>Thread Title</h2>
+                                    <sub>posted {time}</sub>
+                                    <a class=listThreadUser >{username}</a>
+                                </div>
+                                <div class=listThreadContent>
+                                    <a>Test TestTestTest Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test TestTestTestTestTestTestTestTestTestTestTestTestTest</a>
+                                </div>
+                            </div>
+                            <div class=endListItem >
+                                <a>End of list</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

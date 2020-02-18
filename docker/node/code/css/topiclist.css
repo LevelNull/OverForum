@@ -30,3 +30,7 @@ width: 100%;
     max-height: 50vh;
     overflow-y: auto;
 }
+.endListItem{
+    margin: 10px;
+    color: rgb(125,125,125);
+}

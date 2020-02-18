@@ -11,4 +11,5 @@ before_script:
     - pip install -r tests/requirements.txt
 
 script:
+    - py ./tests/container_wait.py
     - pytest
