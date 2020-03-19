@@ -1,4 +1,4 @@
-var config = require("../../../config/settings");
+var config = require("../../../config/mysql");
 module.exports = {
     createTable:
         "CREATE TABLE IF NOT EXISTS "+config.mysqlOptions.prefix+"groups("+
@@ -16,6 +16,8 @@ module.exports = {
         "('administrators',true), "+
         "('moderators',true), "+
         "('users',true)",
+    listGroups:
+        "SELECT BIN_TO_UUID(groupID) as groupID,groupName,enabled FROM "+config.mysqlOptions.prefix+"groups",
     getAll:
         "SELECT * FROM "+config.mysqlOptions.prefix+"groups"
 }

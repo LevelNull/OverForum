@@ -9,10 +9,10 @@ module.exports = {
     mysqlOptions: require("./mysql").mysqlOptions,
     cspPolicies: {
         'default-src': [csp.SELF],
-        'font-src': ['*'],
+        'font-src': [csp.SELF,'https://fonts.gstatic.com/s/raleway/v14/1Ptug8zYS_SKggPNyC0ITw.woff2','https://fonts.gstatic.com/s/raleway/v14/1Ptug8zYS_SKggPNyCMIT5lu.woff2'],
         'script-src': [csp.SELF],
         'style-src': [csp.SELF, 'http://fonts.googleapis.com/'],
-        'img-src': ["*"],
+        'img-src': [csp.SELF],
         'worker-src': [csp.NONE],
         'block-all-mixed-content': true
     }

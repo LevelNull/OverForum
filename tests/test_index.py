@@ -1,6 +1,14 @@
 import requests
-ADDRESS = "https://localhost/"
+import json
+import yaml
+import os
+
+with open(os.path.dirname(os.path.realpath(__file__))+'/config.yaml') as file:
+    config = yaml.load(file, Loader=yaml.FullLoader)
+ADDRESS = config['address']
+
 try:
+    requests.packages.urllib3.disable_warnings() 
     page = requests.get(ADDRESS,verify=False)
 except:
     page = None

@@ -14,18 +14,23 @@ var logger = function(req,res,next){
     console.log(req.method+"\t"+req.ip+"\t"+new Date().getTime()+"\t"+req.url);
     next();
 }
-
+app.use(helmet());
 app.use('*', function(req, res, next) {
     if(!req.secure) {
       var secureUrl = "https://" + req.headers['host'] + req.url; 
       res.writeHead(301, { "Location":  secureUrl });
       res.end();
+      next();
+    }else{
+        res.header('X-XSS-Protection', 1);
+        res.header('Cache-Control', 'no-cache, no-store, must-revalidate');
+        res.header('Pragma','no-cache');
+        next();
     }
-    next();
+    
 });
-//app.use(helmet());
 app.disable('x-powered-by');
-app.use(session({ resave: true ,secret: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) , saveUninitialized: true,cookie:{httpOnly:true,secure:true,sameSite:true}}));
+app.use(session({ resave: true ,secret: Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15) , saveUninitialized: false,cookie:{httpOnly:true,secure:true,sameSite:true}}));
 app.use(cookieParser());
 app.use(csp({policies: mainConfig.cspPolicies }));
 app.use(bodyParser.json({strict:false}));
@@ -42,7 +47,7 @@ httpsServer.listen(443, () => {
 
 
 app.use(logger);
-var permissions = require(".//server_js/auth/permissionManager");
+var permissions = require("./server_js/auth/permissionManager");
 var authmanager = require("./server_js/auth/authManager").startloginListener(app,permissions);
 var adminfunctions = require("./server_js/admin/functions").loadListeners(app,permissions);
-var locations = require("./server_js/locations").loadAll(app);
+var locations = require("./server_js/locations").loadAll(app,permissions);

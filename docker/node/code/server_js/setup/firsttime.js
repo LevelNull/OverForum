@@ -33,7 +33,7 @@ function setupListener(app,mysqlopts,goodCallback,badCallback){
     });
     mysql.end();
 }
-function startSetupListeners(app,mysqlopts,result){
+function startSetupListeners(app,mysqlopts,result,permissions=undefined){
     app.get("/setup/"+result,function(req,res){
         req.session.uuid = result;
         res.render("setup/adminSetup.html");
@@ -43,7 +43,6 @@ function startSetupListeners(app,mysqlopts,result){
         res.sendFile("/var/overforum/conditional/js/setup.js");
     });
     app.post("/setup/"+result+"/createTables", function(req,res){
-        res.json();
         var mysql = new MySql(require("../../config/settings").mysqlOptions);
         var sqlresult = mysql.query(require("../db/tables/users").createTable);
         sqlresult = mysql.query(require("../db/tables/groups").createTable);
@@ -54,22 +53,25 @@ function startSetupListeners(app,mysqlopts,result){
         sqlresult = mysql.query(require("../db/tables/groupmap").setDefaults);
         sqlresult = mysql.query(require("../db/tables/permmap").createTable);
         sqlresult = mysql.query(require("../db/tables/permmap").setDefaults);
-        res.write("{\"success\":true}");
-        res.end();
+        res.json({success:true});
+        mysql = null;
     });
     app.post("/setup/"+result+"/setMysql", function(req,res){
-        res.json();
-        if(req.session.mysql.host != ""){
-            var towrite = "module.exports = {mysqlOptions:"+JSON.stringify(req.session.mysql)+"}";
-            fs.writeFileSync("./config/mysql.js",towrite);
-        }
-        res.write("{\"success\":true}");
-        res.end();
+        // if(req.session.mysql.host != ""){
+        //     var towrite = "module.exports = {mysqlOptions:"+JSON.stringify(req.session.mysql)+"}";
+        //     fs.writeFileSync("./config/mysql.js",towrite);
+        // }
+        res.json({success:true});
     });
     app.post("/setup/"+result+"/finish", function(req,res){
-        res.json();
-        res.write("{\"success\":true}");
-        res.end();
+        if(permissions){
+            permissions.reload();
+            res.json({success:true});
+        }else{
+            res.json({success:false});
+        }
+        
+        
     });
     app.post("/setup/"+result+"/preSetup", function(req,res){
         app.use(express.json());
@@ -79,12 +81,12 @@ function startSetupListeners(app,mysqlopts,result){
             req.body.options = req.body.options;
             testMysql(req,res);
         }else{
-            res.write("{\"success\":false,\"message\":\"Invalid input!\"}");
+            res.json({success: false, message: "Invalid input!"});
         }
     });
     function testMysql(req,res){
+        
         app.use(express.json());
-        res.json();
         if(req.body){
             var options = req.body.options;
             if(options.host === "")options.host = mysqlopts.host;
@@ -96,59 +98,59 @@ function startSetupListeners(app,mysqlopts,result){
             try{
                 var sqlresult = mysql.query("SHOW TABLES",[]);
                 if(sqlresult){
-                    res.write("{\"success\":true,\"message\":\"Connected Successfully!\",\"todo\":"+JSON.stringify(setupSteps)+"}");
-                    res.end();
+                    res.json({success: true,message: "Connected Successfully!",todo: setupSteps});
+                    //res.end("{\"success\":true,\"message\":\"Connected Successfully!\",\"todo\":"+JSON.stringify(setupSteps)+"}");
                 }else{
-                    res.write("{\"success\":false,\"message\":\"Failed to connect to MySql Server!\"}");
-                    res.end();
+                    res.json({success: false,message: "Failed to connect to MySql Server!"});
+                    //res.end("{\"success\":false,\"message\":\"Failed to connect to MySql Server!\"}");
                 }
             }catch(e){
-                res.write("{\"success\":false,\"message\":\"Failed to connect to MySql Server!\"}");
-                res.end();
+                res.json({success: false,message: "Failed to connect to MySql Server!"});
             }
+            mysql = null;
         }
     }
     app.post("/setup/"+result+"/mysqlTest", testMysql);
     app.post("/setup/"+result+"/acs",function(req,res){
         app.use(express.json());
-        res.json();
         var bcrypt = require("bcrypt");
-        var options = {}
+        options = req.session.credentials;
         if(req.session.credentials){
             options = req.session.credentials;
         }else{
             options = req.body.credentials;
         }
-        if(options.password === undefined || options.password.length < 8){
-            res.write("{\"success\":false,\"message\":\"Password must be at least 8 characters!\"}");
-            res.end()
-            return;
-        }
-        if(!noSpecial(options.password) || options.iknowwhatimdoing){
-            if(containsNumeral() || options.iknowwhatimdoing){
-                var hashpass = bcrypt.hashSync(options.password,14);
-                var mysql = new MySql(mysqlopts);
-                try{
-                    var sqlresult = mysql.query(require("../db/tables/users").setUserPassword,[hashpass,req.session.uuid]);
-                    if(sqlresult.affectedRows == 1){
-                        res.write("{\"success\":true,\"message\":\"Success!\"}");
-                    }else if(sqlresult.affectedRows == 0){
-                        res.write("{\"success\":false,\"message\":\"Failed to write to users table!\"}");
-                    }else{
-                        res.write("{\"success\":false,\"message\":\"Database error\"}");
-                    }
-                        res.end(); 
-                }catch(e){
-                    res.write("{\"success\":false,\"message\":\"Database error: "+e+"\"}");
-                    res.end(); 
-                }            
+        if(options.password){
+            if(options.password.length < 8){
+                res.json({success: false,message: "Password must be at least 8 characters!"});
+                return;
+            }
+            if(!noSpecial(options.password) || options.iknowwhatimdoing){
+                if(containsNumeral() || options.iknowwhatimdoing){
+                    var hashpass = bcrypt.hashSync(options.password,14);
+                    var mysql = new MySql(mysqlopts);
+                    try{
+                        var sqlresult = mysql.query(require("../db/tables/users").setUserPassword,[hashpass,req.session.uuid]);
+                        
+                        if(sqlresult.affectedRows == 1){
+                            res.json({success: true, message: "Success!"});
+                        }else if(sqlresult.affectedRows == 0){
+                            res.json({success: false, message: "Failed to write to users table!"});
+                        }else{
+                            res.json({success: false, message: "Database Error!"});
+                        }
+                    }catch(e){
+                        res.json({success: false, message: "Database Error!"});
+                    } 
+                    mysql = null;           
+                }else{
+                    res.json({success: false, message: "Password contains no numbers!"}); 
+                }
             }else{
-                res.write("{\"success\":false,\"message\":\"Password contains no numbers!\"}");
-                res.end();   
+                res.json({success: false, message: "Password contains no special characters!"});
             }
         }else{
-            res.write("{\"success\":true,\"message\":\"Password contains no special characters!\"}");
-            res.end();
+            res.json({success: false,message: "No password "});
         }
         
     });

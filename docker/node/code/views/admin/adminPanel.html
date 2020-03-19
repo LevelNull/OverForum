@@ -1,15 +1,50 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%- include ('header.html') %>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/main.css" >
         <link rel="stylesheet" href="/infopane.css" >
         <link rel="stylesheet" href="/topiclist.css" >
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="/jquery.js"></script>
     </head>
     <body>
+        <%- include ('./../header.html') %>
         <div id=content>
-            
+            <div id=central class="alignLeft grid fill">
+                <div id=sidebar class="sidebyside cell" >
+                    <div class="long-section header-gray section" >
+                        <h2>Navigation</h2>
+                        <div class="section-content" >
+                            <div>
+                                <input id=selectionSearch placeholder="Search"/>
+                            </div>
+                            <br />
+                            <div id=optionlist class="fill list" >
+                                <h2 id=groupsoption class="header-blue pointer tborder">Groups</h2>
+                                <h2 id=usersoption class="pointer tborder">Users</h2>
+                                <h2 id=permissionsoption class="pointer tborder" >Permissions</h2>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div id=mainContent class="sidebyside cell fill" >
+                    <div class="long-section section header-gray" >
+                        <h2 id=infotablehead > Details</h2>
+                        <div class="section-content">
+                            <div class=list >
+                                <table class="gray-darkgary fill selectable" >
+                                    <input id=listtype type="hidden" value=0 />
+                                    <tbody id="infotable" >
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+            </div>
         </div>
+        <script type="text/javascript" src="/admin/adminPanel.js"></script>
     </body>
 </html>

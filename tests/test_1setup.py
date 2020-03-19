@@ -1,6 +1,11 @@
 import requests
 import json
-ADDRESS = "https://localhost"
+import yaml
+import os
+
+with open(os.path.dirname(os.path.realpath(__file__))+'/config.yaml') as file:
+    config = yaml.load(file, Loader=yaml.FullLoader)
+ADDRESS = config['address']
 COOKIES = None
 SETUPLOC = ""
 
@@ -22,7 +27,6 @@ def test_0null_Login():
     data = json.loads(page.text)
     assert data["success"] == True
     SETUPLOC = data["goto"]
-    COOKIES = page.cookies
 
 def test_1setup_page():
     global ADDRESS
@@ -34,8 +38,10 @@ def test_1setup_page():
     except:
         page = None
     assert page != None
-    print(page.text)
+    #print(page.text)
     assert "Administrative Setup" in page.text
+    COOKIES = page.cookies
+    #print(page.cookies.keys())
 
 def test_2mysql_Test():
     global ADDRESS
@@ -85,7 +91,7 @@ def test_3preSetup():
     except:
         page = None
     assert page != None
-    print(page.text)
+    #print(page.text)
     data = json.loads(page.text)
     assert data["success"] == True
 
@@ -105,26 +111,28 @@ def test_4set_mysql():
 def test_5create_tables():
     global SETUPLOC
     global COOKIES
+    #print(COOKIES.keys())
     try:
         requests.packages.urllib3.disable_warnings() 
         page = requests.post(ADDRESS+SETUPLOC+"/createTables",cookies=COOKIES,verify=False)
     except:
         page = None
     assert page != None
-    print(page.text)
+    #print(page.text)
     data = json.loads(page.text)
     assert data["success"] == True
 
 def test_6admin_password():
     global SETUPLOC
     global COOKIES
+    print(COOKIES)
     try:
         requests.packages.urllib3.disable_warnings() 
         page = requests.post(ADDRESS+SETUPLOC+"/acs",cookies=COOKIES,verify=False)
     except:
         page = None
     assert page != None
-    print(page.text)
+    #print(page.text)
     data = json.loads(page.text)
     assert data["success"] == True
 
@@ -137,13 +145,14 @@ def test_7finish():
     except:
         page = None
     assert page != None
-    print(page.text)
+    #print(page.text)
     data = json.loads(page.text)
     assert data["success"] == True
 
 
 # def main():
-#     test_1null_Login()
+#     test_0null_Login()
+#     test_1setup_page()
 #     test_2mysql_Test()
 #     test_3preSetup()
 #     test_4set_mysql()

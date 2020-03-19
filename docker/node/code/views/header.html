@@ -12,8 +12,9 @@
                 <a href="/">Home</a>
                 <% if(locals.user) { %>
                     <a href="/myaccount">Profile</a>
-                    <% if(locals.user.adminpanel){ %>
-                    <a href="admin/panel" >Admin Panel</a>
+                    <% if(locals.user.cache && 
+                    "pages.adminpanel.view" in locals.user.cache){ %>
+                    <a href="/admin/panel" >Admin Panel</a>
                     <% } %>
                     <a href="/logout">Log out</a>
                 <% } %>

@@ -14,7 +14,10 @@ module.exports ={
             "enabled BOOLEAN NOT NULL, "+
             "UNIQUE KEY (username,email)"+
             ")",
-            
+    getUserListLimited:
+        "SELECT username,firstname,lastname "+
+        "FROM "+config.mysqlOptions.prefix+"users "+
+        "LIMIT ?, 50",
     getUserByEmail:
         "SELECT "+
         "BIN_TO_UUID(userid) as uuid,"+
