@@ -1,0 +1,44 @@
+<div id="overlayItem" class="fullscreen">
+    <div id=userForm class="center short-section section header-gray" >
+        <h2>Add User</h2>
+        <div class=section-content>
+            <div class=inputArea>
+                <div>
+                    <input id=firstname placeholder="First Name">
+                    <input id=surname placeholder="Last Name">
+                    <input id=email placeholder="Email">
+                    <input id=username placeholder="Username">
+                    <input id=password type="password" placeholder="Password">
+                    <input id=passwordconfirm type="password" placeholder="Confirm Password">
+
+                    <div class="half sidebyside" >
+                        <select id=groupSelector class=selector >
+                            <option value=false >Group (None)</option>
+                            <% if(locals.groups){ %>
+                                <% for(var item in locals.groups){ var name = locals.groups[item].name %>
+                                    <option value=<%- item %> ><%- name.charAt(0).toUpperCase() + name.slice(1) %></option>
+                                <% } %>
+                            <% } %>
+                            <option value="Nope">Seriously, choose one...</option>
+                        </select>
+                    </div>
+                    <div class="half sidebyside" >
+                        <select id="userMode" class=selector >
+                            <option value=0 >User Mode: Enabled</option>
+                            <option value=1 >Disabled</option>
+                            <option value=2 >Restricted</option>
+                        </select>
+                    </div>
+                <a id=warnText class=warnText ></a>
+                <a id=errorText class=errorText ></a>
+                </div>
+                <button class="button" id="cancelButton" >
+                    <a>Cancel</a>
+                </button>
+                <button class="button" id="doneButton" >
+                    <a>Done</a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

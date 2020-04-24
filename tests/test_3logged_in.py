@@ -51,3 +51,8 @@ def test_2admin_panel():
     assert page != None
     assert page.status_code == 200
     assert "<h2>Navigation</h2>" in page.text
+
+def test_3admin_js():
+    page = query("admin/adminPanel.js")
+    assert page != None
+    assert page.status_code == 200

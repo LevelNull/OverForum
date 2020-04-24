@@ -1,0 +1,105 @@
+html{
+    font-family: Raleway;
+    color: rgb(180,180,180);
+}
+#header{
+    width:100%;
+    height: 50px;
+    background-color: rgb(38,38,38);
+    color: rgb(180,180,180);
+    position: absolute;
+    left: 0;
+    top: 0;
+    
+    vertical-align: middle;
+    display: inline-block;
+}
+
+#nameplate{
+    position: absolute;
+    float: left;
+    line-height: 50px;
+    cursor: pointer;
+}
+#nameplate a{
+    padding: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    color:#818181;
+    transition: 0.3s;
+}
+#nameplate a:hover{
+    color: rgb(200, 200, 200);
+}
+.nav{
+    line-height: 50px;
+    z-index: 10;
+}
+.nav-wide{
+    float: right;
+}
+.nav-narrow{
+    display: inline-block;
+}
+.right-nav{
+    float: right;
+    text-align: right;
+}
+.nav-list{
+    width: 25px;
+    display: block;
+    transition: 0.25s;
+    height: 0;
+    overflow: hidden;
+    background-color: rgb(50,50,50);
+    text-align: center;
+    margin-top: -15px;
+    border-radius: 5px;
+}
+.nav-narrow:hover .nav-list{
+    height: auto;
+    overflow: auto;
+    width: auto;
+}
+
+.nav-list a{
+    transition: 0.25s;
+    background-color: rgb(50,50,50);
+    cursor: pointer;
+    line-height: 10px;
+    display: block;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: rgb(180,180,180);
+    min-width: 100px;
+}
+.nav-list a:hover{
+    color: rgb(245, 245, 245);
+    background-color: rgb(38,38,38);
+}
+.opener{
+    width: 15px;
+    height: 15px;
+}
+.userinfo{
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 12px;
+    margin-left: 15px;
+    margin-right: 10px;
+}
+.login-button{
+    transition: 0.25s;
+    font-size: 18px;
+    cursor: pointer;
+    text-decoration: none;
+    color: rgb(180,180,180);
+}
+.login-button:hover{
+    color: rgb(245, 245, 245);
+}
+.user-nameplate{
+    color: #006F7C;
+}

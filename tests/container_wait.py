@@ -1,7 +1,12 @@
 import requests
 import json
 import time
-ADDRESS = "https://localhost"
+import os
+import yaml
+
+with open(os.path.dirname(os.path.realpath(__file__))+'/config.yaml') as file:
+    config = yaml.load(file, Loader=yaml.FullLoader)
+ADDRESS = config['address']
 MAX_RETRIES = 12
 
 def checkfor_web(count):

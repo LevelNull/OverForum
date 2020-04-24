@@ -1,0 +1,37 @@
+<link rel="stylesheet" href="/header.css" >
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Raleway" />
+<div id=header>
+    <div id=nameplate >
+        <a href="/">OverForum</a>
+    </div>
+    <div class=right-nav>
+        
+        <div class="nav nav-narrow" >
+            <img class=opener src="/opener_down.png">
+            <div class=nav-list>
+                <a href="/">Home</a>
+                <% if(locals.user) { %>
+                    <a href="/myaccount">Profile</a>
+                    <% if(locals.user.cache && 
+                    "pages.adminpanel.view" in locals.user.cache){ 
+                        if(locals.user.cache["pages.adminpanel.view"]){
+                        %>
+                    <a href="/admin/panel" >Admin Panel</a>
+                    <% }} %>
+                    <a id=logoutButton >Log out</a>
+                    <script src="/auth/logout.js" ></script>
+                <% } %>
+            </div>
+        </div>
+        <div class=userinfo>
+                <% if(locals.user) { %>
+                    <a href="/myaccount" class="user-nameplate login-button" >
+                <%- user.firstname %>
+                    </a>
+                <% }else{ %>
+                    <a href="/login" class=login-button >Login</a>
+                <% } %>
+        </div>
+    </div>
+</div>
+<div ><p id=contextMenu class=contextMenu ></p></div>

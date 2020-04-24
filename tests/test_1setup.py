@@ -140,7 +140,7 @@ def test_7finish():
     global SETUPLOC
     global COOKIES
     try:
-        requests.packages.urllib3.disable_warnings() 
+        requests.packages.urllib3.disable_warnings()
         page = requests.post(ADDRESS+SETUPLOC+"/finish",cookies=COOKIES,verify=False)
     except:
         page = None

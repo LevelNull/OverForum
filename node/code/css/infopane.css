@@ -1,0 +1,240 @@
+
+.section{
+    background-color: rgb(75,75,75);
+    display: inline-block;
+    margin: 1px;
+    border-radius: 2px;
+    padding:0;
+    vertical-align: top;
+    margin-top: 15px;
+    text-align: center;
+}
+.section input{
+    background-color: rgb(80,80,80);
+    color: rgb(200,200,200);
+    width: 95%;
+    margin-top: 3px;
+    padding: 5px;
+    border: none;
+    font-size: medium;
+}
+input.good{
+    border: 1px solid rgb(0,150,0) !important;
+}
+input.bad{
+    border: 1px solid rgb(150,0,0) !important;
+}
+input.warn{
+    border: 1px solid rgb(153, 135, 0) !important;
+}
+.section h2{
+    margin: 5px;
+}
+.inlineHead{
+    font-size:medium;
+}
+hr{
+    border-color: rgb(75,75,75);
+    background-color: rgb(75,75,75);
+}
+.long-section{
+    min-width: 200px;
+    width: 98%;
+}
+.short-section{
+    min-width: 100px;
+    max-width: 500px;
+    width: 48.75%;
+}
+.section-content{
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    height: 100%;
+    margin: 0;
+    background-color: rgb(45,45,45);
+    min-height: 35px;
+    padding: 0;
+}
+.header-blue{
+    background-color: rgb(0, 92, 100);
+}
+.header-yellow{
+    background-color: rgb(100, 92, 0);
+}
+.header-green{
+    background-color: #004D17;
+}
+.header-red{
+    background-color: #660000;
+}
+.header-purple{
+    background-color: #660066;
+}
+.header-orange{
+    background-color: #994C00;
+}
+.header-gray{
+    background-color: rgb(65,65,65);
+}
+.header-dark-gray{
+    background-color: rgb(97, 66, 66);
+}
+.sidebyside{
+    display: inline-block;
+}
+#sidebar{
+    vertical-align: top;
+    min-width:250px;
+}
+.collapse{
+    height: 0px;
+    overflow: hidden;
+    transition: 0.5s;
+}
+.hfill{
+    width: 100%;
+}
+.vfill{
+    height: 100%;
+}
+.grid{
+    display: table;
+}
+.cell{
+    display: table-cell;
+}
+img{
+    width: 75%;
+    border-radius: 5px;
+}
+.table-dictionary-vertical{
+    text-align: left;
+}
+.table-dictionary-vertical h2{
+
+}
+.table-dictionary-vertical tr{
+margin: 0;
+}
+.noborder{
+    border: none !important;
+}
+.tborder{
+    border-top: 1px solid rgb(75,75,75);
+}
+.list h2{
+    margin:0;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.table-dictionary-vertical th{
+    padding-right: 15px;
+    padding-left: 5px;
+}
+.table-dictionary-vertical td{
+
+}
+input:disabled{
+    background-color: rgb(52,52,52) !important;
+}
+.button{
+    padding: 5px;
+    padding-left: 25px;
+    padding-right: 25px;
+    display: inline-block;
+    background-color: rgb(80,80,80);
+    color: rgb(200,200,200);
+    border: none;
+    font-size: 14px;
+    margin:10px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+.button.good{
+    background-color: rgb(0,100,0);
+}
+.button.bad{
+    background-color: rgb(100,0,0);
+}
+.alignLeft{
+    text-align: left;
+}
+.alignCenter{
+    text-align: center;
+}
+.pointer{
+    cursor: pointer;
+}
+.gray-darkgary tr:nth-child(even){
+    background-color: rgb(55,55,55);
+}
+.gray-darkgary tr:nth-child(odd){
+    background-color: rgb(45,45,45);
+}
+.list table{
+    border-collapse: collapse;
+    text-align: left;
+    border: none;
+    margin: 0;
+}
+.list table td{
+    min-width: 75px;
+}
+.list table tr{
+    transition: 0.25s;
+}
+.list table tr:hover{
+    background-color: rgb(0, 92, 100);
+}
+.list table thead{
+    margin: 0;
+    border-top: 1px solid rgb(25,25,25)
+}
+.list table thead a{
+    font-size: x-large;
+    margin-left: 5px;
+}
+.list table thead tr{
+    background-color: transparent !important;
+    border: none;
+}
+.list table tr h3{
+    color: rgb(150,150,150);
+    margin:2px;
+}
+.list td a{
+    font-size: large;
+    margin-left: 5px;
+}
+.list tbody{
+    line-height: 25px;
+}
+.list td{
+    border-right: 1px solid black;
+}
+.list thead{
+    line-height: 25px;
+}
+.list{
+    margin: 0;
+    padding:0;
+}
+.selectable tr{
+    cursor: pointer;
+}
+
+@media only screen and (max-width:800px){
+    .short-section{
+        max-width: none;
+        width: 98%;
+        margin-left: 1%;
+    }
+    .long-section{
+        width: 98%;
+        margin-left: 1%;
+    }
+    .extra{
+        display: none;
+    }
+}

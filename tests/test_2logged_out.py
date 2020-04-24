@@ -7,7 +7,7 @@ with open(os.path.dirname(os.path.realpath(__file__))+'/config.yaml') as file:
     config = yaml.load(file, Loader=yaml.FullLoader)
 ADDRESS = config['address']
 COOKIES = None
-FOUROHFOUR = 'This location doesn\'t seem to exist...'
+FOUROHFOUR = 'The resource you\'re looking for is either not here, or is inaccessible.'
 
 def query(path,params={}):
     global ADDRESS

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="/main.css" >
+        <link rel="stylesheet" href="/infopane.css" >
+        <link rel="stylesheet" href="/topiclist.css" >
+        <link rel="stylesheet" href="/menu.css" >
+        <link rel="stylesheet" href="/overlay.css" >
+        <link rel="stylesheet" href="/loginPage.css" >
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="/jquery.js"></script>
+    </head>
+    <body>
+        <%- include ('./../header.html') %>
+        <div id=content>
+            <div class="hmenu menu hfill" >
+                <div class=menucontent >
+                    <a id="addUserButton" class="clickable menuitem">Add User</a>
+                    <a id="addGroupButton" class="clickable menuitem">Add Group</a>
+                </div>
+                
+            </div>
+            <div id=central class="alignLeft grid hfill">
+                    <div class="short-section header-blue section" >
+                        <h2>Navigation</h2>
+                        <div class="section-content" >
+                            <select id=optionsList class=selector >
+                                <option value="users">Users</option>
+                                <option value="groups">Groups</option>
+                                <option value="permissions">Permissions</option>
+                            </select>
+
+                            <div>
+                                <input id=selectionSearch placeholder="Search"/>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="short-section header-blue section extra" >
+                        <h2>Statistics</h2>
+                        <div class="section-content" >
+
+                        </div>
+                    </div>
+                    <div class="long-section section header-gray" >
+                        <h2 id=infotablehead > Details</h2>
+                        <div class="section-content">
+                            <div class=list >
+                                <table class="gray-darkgary hfill selectable" >
+                                    <input id=listtype type="hidden" value=0 />
+                                    <thead id=listHeader class="header-gray" ></thead>
+                                    <tbody id="infotable" >
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+    <div id=extraContent ></div>
+    <script type="text/javascript" src="/admin/adminPanel.js"></script>
+</html>

@@ -1,0 +1,82 @@
+
+body{
+    background-color: rgb(33,33,33);
+    margin: 0;
+}
+#content{
+    margin: 50px 0 0 0;
+    width: 100%;
+    text-align: center;
+    
+}
+#central{
+    line-height: normal;
+    display: inline-block;
+    vertical-align: top;
+    width:92%;
+    height:100%;
+    max-width: 1200px;
+    background-color: rgb(33,33,33);
+}
+.group-bubble{
+    margin:0;
+    padding:5px;
+    border-radius: 5px;
+}
+.long-header{
+    width: 100%;
+    border-bottom: 1px solid rgb(45,45,45);
+}
+@media only screen and (max-width:850px){
+    #central{width: 100%;}
+}
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    background: rgb(188, 188, 188);
+    -webkit-border-radius: 5px;
+}
+ ::-webkit-scrollbar-corner {
+    background: #000;
+}
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.3); 
+    border-radius: 5px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    background: rgb(150, 141, 141);
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+.blue{
+    background-color: blue;
+}
+.contextMenu{
+    position: absolute;
+    overflow: hidden;
+    display: block;
+    top: -500px;
+    left: -500px;
+    width: 0;
+    height: 0;
+    background-color: rgb(35,35,35);
+    padding: 5px;
+    border-radius: 3px;
+}
+.contextMenu .cMenuHeader{
+    font-size: larger;
+    font-weight: bolder;
+    padding:5px;
+    line-height: 30px;
+}
+.contextMenu .cMenuContents a{
+    display: block;
+    border-top: 1px solid rgb(50,50,50);
+    cursor: pointer;
+    transition: 0.25s;
+    padding:5px;
+}
+.contextMenu .cMenuContents a:hover{
+    color: white;
+}

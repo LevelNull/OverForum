@@ -1,0 +1,41 @@
+.menu{
+    background-color: rgb(44,44,44);
+}
+
+.hmenu{
+    padding-top: 1px;
+    padding-bottom: 1px;
+    text-align: left;
+    columns: auto;
+    column-gap: normal;
+}
+.hmenu li{
+    display: inline-block;
+    padding-left: 10px;
+}
+.menucontent{
+    margin-left: 10px;
+    padding: 10px;
+}
+.vmenu{
+
+}
+.menuitem{
+    margin-right: 10px;
+}
+.menu a{
+    font-size: large;
+    text-decoration: none;
+    color: rgb(150,150,150);
+    transition: 0.25s;
+}
+.menu a:hover{
+    color: rgb(200,200,200);
+}
+.clickable{
+    cursor: pointer;
+}
+.hmenu a{
+    column-span: 1;
+    white-space: nowrap;
+}

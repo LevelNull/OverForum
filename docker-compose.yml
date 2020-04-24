@@ -1,0 +1,42 @@
+version: '3'
+services:
+    overforum_node:
+        container_name: overforum_node
+        build: 
+            context: ./node/
+            dockerfile: ./Dockerfile
+        volumes: 
+            - ./node/code:/var/overforum
+            - ./cert:/var/overforum/cert
+        ports: 
+            - "80:80"
+            - "443:443"
+        environment: 
+            MYSQL_USER: overforum
+            MYSQL_PASSWORD: travisci
+        depends_on: 
+            - overforum_mysql
+
+    overforum_mysql:
+        container_name: overforum_mysql
+        build: 
+            context: ./mysql/
+            dockerfile: ./Dockerfile
+        environment: 
+            MYSQL_RANDOM_ROOT_PASSWORD: 1
+            MYSQL_USER: overforum
+            MYSQL_PASSWORD: travisci
+        ports: 
+            - "33060:3306"
+
+    # overforum_splunk:
+    #     container_name: overforum_splunk
+    #     build:
+    #         context: ./splunk/
+    #         dockerfile: ./Dockerfile
+    #     ports: 
+    #         - 8000:8000
+    #     environment: 
+    #         SPLUNK_START_ARGS: --accept-license
+    #         SPLUNK_PASSWORD: travisci
+    #         SPLUNK_APPS_URL: https://splunkbase.splunk.com/app/4768/release
